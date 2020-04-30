@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { Image } from 'react-native';
 
-import logo from '../../assets/logo-01.png';
+import logo from '../../assets/logo.png';
 
 import Background from '../../components/Background';
 
@@ -11,14 +12,20 @@ import {
   SubmitButton,
   SignLink,
   SignLinkText,
-  Imagem,
 } from './styles';
 
-export default function SignIn({navigation}) {
+// eslint-disable-next-line react/prop-types
+export default function SignIn({ navigation }) {
+  const passwordRef = useRef();
+
+  function handleSubmit() {
+    console.log('teste');
+  }
+
   return (
     <Background>
       <Container>
-        <Imagem source={logo} />
+        <Image source={logo} />
         <Form>
           <FormInput
             icon="mail-outline"
@@ -26,17 +33,21 @@ export default function SignIn({navigation}) {
             autoCorrect={false}
             autoCapitalize="none"
             placeholder="Digite seu e-mail"
+            returnKeyType="next"
+            onSubmitEditing={() => {}}
           />
 
           <FormInput
             icon="lock-outline"
             secureTextEntry
-            autoCorrect={false}
             autoCapitalize="none"
-            placeholder="Digite seu e-mail"
+            placeholder="Digite sua senha"
+            ref={passwordRef}
+            returnKeyType="send"
+            onSubmitEditing={handleSubmit}
           />
 
-          <SubmitButton onPress={() => {}}>Acessar</SubmitButton>
+          <SubmitButton onPress={handleSubmit}>Acessar</SubmitButton>
         </Form>
 
         <SignLink onPress={() => navigation.navigate('SignUp')}>

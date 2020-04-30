@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { Image } from 'react-native';
 
-import logo from '../../assets/logo-01.png';
+import logo from '../../assets/logo.png';
 
 import Background from '../../components/Background';
 
@@ -11,14 +12,21 @@ import {
   SubmitButton,
   SignLink,
   SignLinkText,
-  Imagem,
 } from './styles';
 
-export default function SignUp({navigation}) {
+export default function SignUp({ navigation }) {
+  const mailRef = useRef();
+  const passowordRef = useRef();
+  console.log('Teste');
+
+  function handleSubmit() {
+    console.log('Teste');
+  }
+
   return (
     <Background>
       <Container>
-        <Imagem source={logo} />
+        <Image source={logo} />
         <Form>
           <FormInput
             icon="person-outline"
@@ -33,6 +41,7 @@ export default function SignUp({navigation}) {
             autoCorrect={false}
             autoCapitalize="none"
             placeholder="Digite seu e-mail"
+            ref={mailRef}
           />
           <FormInput
             icon="lock-outline"
@@ -40,16 +49,12 @@ export default function SignUp({navigation}) {
             autoCorrect={false}
             autoCapitalize="none"
             placeholder="Digite seu e-mail"
+            ref={passowordRef}
+            returnKeyType="send"
+            onSubmitEditing={handleSubmit}
           />
 
-          <FormInput
-            icon="work"
-            autoCorrect={false}
-            autoCapitalize="none"
-            placeholder="Seu projeto. Ex: GIM, URA"
-          />
-
-          <SubmitButton onPress={() => {}}>Criar conta</SubmitButton>
+          <SubmitButton onPress={handleSubmit}>Criar conta</SubmitButton>
         </Form>
 
         <SignLink onPress={() => navigation.navigate('SignIn')}>
