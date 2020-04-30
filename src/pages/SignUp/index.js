@@ -17,7 +17,6 @@ import {
 export default function SignUp({ navigation }) {
   const mailRef = useRef();
   const passowordRef = useRef();
-  console.log('Teste');
 
   function handleSubmit() {
     console.log('Teste');

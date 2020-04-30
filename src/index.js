@@ -1,14 +1,15 @@
 import 'react-native-gesture-handler';
+import React from 'react';
 import { StatusBar } from 'react-native';
 
-import React from 'react';
+import './config/ReactotronConfig';
 
 import Routes from './routes';
 
 export default function App() {
   return (
     <>
-      <StatusBar barStyle="dark-content" backgroundColor="#464647" />
+      <StatusBar barStyle="light-content" backgroundColor="#464647" />
       <Routes />
     </>
   );
