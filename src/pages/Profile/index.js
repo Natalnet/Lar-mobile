@@ -2,10 +2,12 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { Button } from 'react-native';
+import { Button, View, Text } from 'react-native';
+import { BaseButton } from 'react-native-gesture-handler';
 
 import Background from '../../components/Background';
 import { updateProfileRequest } from '../../store/modules/user/actions';
+import { signOut } from '../../store/modules/auth/actions';
 
 import {
   Container,
@@ -47,6 +49,10 @@ export default function Profile() {
         confirmPassword,
       })
     );
+  }
+
+  function handleLogout() {
+    dispatch(signOut());
   }
 
   return (
@@ -114,9 +120,13 @@ export default function Profile() {
             onChangeText={setConfirmPassword}
           />
 
-          <SubmitButton title="Atualizar perfil" onPress={handleSubmit}>
-            Atualizar perfil
-          </SubmitButton>
+          <Button title="Atualizar perfil" onPress={handleSubmit}>
+            <Text>Atualizar perfil</Text>
+          </Button>
+
+          <View style={{ marginTop: 20 }}>
+            <Button color="#f64c75" title="Deslogar" onPress={handleLogout} />
+          </View>
         </Form>
       </Container>
     </Background>

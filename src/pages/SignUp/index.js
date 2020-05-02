@@ -70,7 +70,7 @@ export default function SignUp({ navigation }) {
             onChangeText={setPassword}
           />
 
-          <SubmitButton onPress={handleSubmit}>Criar conta</SubmitButton>
+          <Button title="Criar conta" onPress={handleSubmit} />
         </Form>
 
         <SignLink

@@ -7,6 +7,8 @@ import logo from '../../assets/logo.png';
 import Background from '../../components/Background';
 import { signInRequest } from '../../store/modules/auth/actions';
 
+import { Button } from 'react-native';
+
 import {
   Container,
   Form,
@@ -60,9 +62,9 @@ export default function SignIn({ navigation }) {
             onChangeText={setPassword}
           />
 
-          <SubmitButton loading={loading} onPress={handleSubmit}>
+          <Button title="Acessar" loading={loading} onPress={handleSubmit}>
             Acessar
-          </SubmitButton>
+          </Button>
         </Form>
 
         <SignLink onPress={() => navigation.navigate('SignUp')}>
