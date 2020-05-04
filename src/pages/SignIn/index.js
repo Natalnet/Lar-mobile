@@ -1,13 +1,10 @@
 import React, { useRef, useState } from 'react';
-import { Image } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo-01.png';
 
 import Background from '../../components/Background';
 import { signInRequest } from '../../store/modules/auth/actions';
-
-import { Button } from 'react-native';
 
 import {
   Container,
@@ -16,6 +13,7 @@ import {
   SubmitButton,
   SignLink,
   SignLinkText,
+  Imagem,
 } from './styles';
 
 // eslint-disable-next-line react/prop-types
@@ -36,7 +34,7 @@ export default function SignIn({ navigation }) {
   return (
     <Background>
       <Container>
-        <Image source={logo} />
+        <Imagem source={logo} />
         <Form>
           <FormInput
             icon="mail-outline"
@@ -62,9 +60,9 @@ export default function SignIn({ navigation }) {
             onChangeText={setPassword}
           />
 
-          <Button title="Acessar" loading={loading} onPress={handleSubmit}>
+          <SubmitButton loading={loading} onPress={handleSubmit}>
             Acessar
-          </Button>
+          </SubmitButton>
         </Form>
 
         <SignLink onPress={() => navigation.navigate('SignUp')}>

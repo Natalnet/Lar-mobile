@@ -12,8 +12,10 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 
-import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
+
+import Dashboard from './pages/Dashboard';
+import ConfirmBorrowed from './pages/Dashboard/Confirm';
 
 import SelectProvider from './pages/New/SelectProvider';
 import SelectDateTime from './pages/New/SelectDateTime';
@@ -29,7 +31,31 @@ export default (signed = false) =>
         }),
         App: createBottomTabNavigator(
           {
-            Dashboard,
+            Dashboard: {
+              screen: createStackNavigator(
+                { Dashboard, ConfirmBorrowed },
+                {
+                  defaultNavigationOptions: {
+                    headerTransparent: true,
+                    headerTintColor: '#fff',
+                    headerLeftContainerStyle: {
+                      marginLeft: 10,
+                    },
+                  },
+                }
+              ),
+              navigationOptions: {
+                tabBarVisible: true,
+                tabBarLabel: 'Empréstimos',
+                tabBarIcon: (
+                  <Icon
+                    name="history"
+                    size={20}
+                    color="rgba(255, 255, 255, 0.6)"
+                  />
+                ),
+              },
+            },
             New: {
               screen: createStackNavigator(
                 {
@@ -49,10 +75,10 @@ export default (signed = false) =>
               ),
               navigationOptions: {
                 tabBarVisible: true,
-                tabBarLabel: 'Agendar',
+                tabBarLabel: 'Materiais',
                 tabBarIcon: (
                   <Icon
-                    name="add-circle-outline"
+                    name="storage"
                     size={20}
                     color="rgba(255, 255, 255, 0.6)"
                   />

@@ -3,16 +3,23 @@ import styled from 'styled-components/native';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-export const Container = styled.KeyboardAvoidingView.attrs({})`
+export const Container = styled.ScrollView.attrs({
+  showsVerticalScrollIndicator: false,
+})`
   flex: 1;
-  justify-content: center;
-  align-items: center;
   padding: 0 30px;
+  margin-top: 40px;
+`;
+
+export const Imagem = styled.Image`
+  height: 190px;
+  width: 230px;
+  align-self: center;
 `;
 
 export const Form = styled.View`
   align-self: stretch;
-  margin-top: 50px;
+  margin-top: 15px;
 `;
 
 export const FormInput = styled(Input)`
@@ -25,6 +32,8 @@ export const SubmitButton = styled(Button)`
 
 export const SignLink = styled.TouchableOpacity`
   margin-top: 20px;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const SignLinkText = styled.Text`

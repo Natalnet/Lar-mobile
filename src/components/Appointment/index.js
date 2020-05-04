@@ -1,41 +1,27 @@
 import React, { useMemo } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { parseISO, formatRelative } from 'date-fns';
-import pt from 'date-fns/locale/pt';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { Container, Left, Avatar, Info, Name, Time } from './styles';
+import {
+  Container,
+  Left,
+  Avatar,
+  Info,
+  Name,
+  Time,
+  SubmitButton,
+} from './styles';
 
-export default function Appointment({ data, onCancel }) {
-  const dateParsed = useMemo(() => {
-    return formatRelative(parseISO(data.date), new Date(), {
-      locale: pt,
-      addSuffix: true,
-    });
-  }, [data.date]);
-
+export default function Appointment({ navigation, data }) {
   return (
-    <Container past={data.past}>
-      <Left>
-        <Avatar
-          source={{
-            uri: data.provider.avatar
-              ? data.provider.avatar.url
-              : 'https://api.adorable.io/avatars/50/abott@adorable.png',
-          }}
-        />
-
-        <Info>
-          <Name>{data.provider.name}</Name>
-          <Time>{dateParsed}</Time>
-        </Info>
-      </Left>
-
-      {data.cancelable && !data.canceled_at && (
-        <TouchableOpacity onPress={onCancel}>
-          <Icon name="event-busy" size={23} color="#f64c75" />
-        </TouchableOpacity>
-      )}
+    <Container>
+      <Name>{data.item.name}</Name>
+      <Time>Quantidade em empréstimo: {data.amount}</Time>
+      <SubmitButton
+        onPress={() => navigation.navigate('ConfirmBorrowed', { data })}
+      >
+        Realizar devolução
+      </SubmitButton>
     </Container>
   );
 }

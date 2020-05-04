@@ -1,17 +1,17 @@
 import styled from 'styled-components/native';
 
+import Button from '../../components/Button';
+
 export const Container = styled.View`
   margin-bottom: 15px;
   padding: 20px;
-  border-radius: 4px;
+  border-radius: 10px;
   background: #fff;
 
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
-
-  opacity: ${props => (props.past ? 0.7 : 1)};
 `;
 
 export const Left = styled.View`
@@ -40,4 +40,10 @@ export const Time = styled.Text`
   color: #999;
   font-size: 13px;
   margin-top: 4px;
+`;
+
+export const SubmitButton = styled(Button)`
+  margin-top: 5px;
+  width: 100%;
+  height: 42px;
 `;
