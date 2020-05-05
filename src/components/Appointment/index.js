@@ -1,16 +1,6 @@
-import React, { useMemo } from 'react';
-import { TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import React from 'react';
 
-import {
-  Container,
-  Left,
-  Avatar,
-  Info,
-  Name,
-  Time,
-  SubmitButton,
-} from './styles';
+import { Container, Name, Time, SubmitButton } from './styles';
 
 export default function Appointment({ navigation, data }) {
   return (
