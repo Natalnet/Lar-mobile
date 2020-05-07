@@ -9,7 +9,7 @@ import {
   Location,
 } from './styles';
 
-export default function Material({ data, page, setPage }) {
+export default function Material({ data, page, setPage, navigation }) {
   return (
     <>
       <Container>
@@ -19,7 +19,11 @@ export default function Material({ data, page, setPage }) {
         <Location>Localização: {data.location}</Location>
 
         {data.amount_available !== 0 && (
-          <SubmitButton>Realizar empréstimo</SubmitButton>
+          <SubmitButton
+            onPress={() => navigation.navigate('Confirm', { data })}
+          >
+            Realizar empréstimo
+          </SubmitButton>
         )}
       </Container>
     </>

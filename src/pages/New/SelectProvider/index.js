@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { withNavigationFocus } from 'react-navigation';
 
 import api from '../../../services/api';
 
@@ -9,11 +10,12 @@ import Material from '../Material';
 
 import { Container, Title, List, Input, Pagination } from './styles';
 
-export default function SelectProvider({ navigation }) {
+function SelectProvider({ isFocused, navigation }) {
   const [itens, setItens] = useState([]);
   const [name, setName] = useState('');
   const [location, setLocation] = useState('');
   const [page, setPage] = useState(1);
+  const [maxPagination, setMaxPagination] = useState('');
 
   useEffect(() => {
     async function loadItens() {
@@ -22,11 +24,23 @@ export default function SelectProvider({ navigation }) {
           location ? '&location=' + location : ''
         }`
       );
-
       setItens(response.data);
     }
-    loadItens();
-  }, [page, name, location]);
+    async function loadNumberPages() {
+      const maxPage = await api.get(
+        `/invetory?${location ? 'location=' + location : ''}${
+          name ? '&name=' + name : ''
+        }`
+      );
+
+      setMaxPagination(1 + parseInt(maxPage.data.length / 10));
+    }
+
+    if (isFocused) {
+      loadNumberPages();
+      loadItens();
+    }
+  }, [page, name, location, maxPagination, isFocused]);
 
   return (
     <Background>
@@ -39,6 +53,7 @@ export default function SelectProvider({ navigation }) {
           placeholder="Filtrar por nome"
           value={name}
           onChangeText={setName}
+          onChange={() => setPage(1)}
         />
         <Input
           icon="search"
@@ -47,6 +62,7 @@ export default function SelectProvider({ navigation }) {
           placeholder="Filtrar por localização"
           value={location}
           onChangeText={setLocation}
+          onChange={() => setPage(1)}
         />
 
         <List
@@ -70,11 +86,20 @@ export default function SelectProvider({ navigation }) {
             />
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => setPage(page + 1)}>
-            <Icon name="chevron-right" size={20} color="#fff" />
+          <TouchableOpacity
+            disabled={page >= maxPagination}
+            onPress={() => setPage(page + 1)}
+          >
+            <Icon
+              name="chevron-right"
+              size={20}
+              color={page >= maxPagination ? '#a3a0a0' : '#fff'}
+            />
           </TouchableOpacity>
         </Pagination>
       </Container>
     </Background>
   );
 }
+
+export default withNavigationFocus(SelectProvider);

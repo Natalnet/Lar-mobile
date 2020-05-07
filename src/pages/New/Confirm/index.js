@@ -1,50 +1,57 @@
-import React, { useMemo } from 'react';
-import { formatRelative, parseISO } from 'date-fns';
-import pt from 'date-fns/locale/pt';
-import { TouchableOpacity } from 'react-native';
-
-import api from '../../../services/api';
-
+import React, { useState, useEffect } from 'react';
+import { TouchableOpacity, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Background from '../../../components/Background';
 
-import { Container, Avatar, Name, Time, SubmitButton } from './styles';
+import { Container, Title, Available, Input, SubmitButton } from './styles';
 
 export default function Confirm({ navigation }) {
-  const provider = navigation.getParam('provider');
-  const time = navigation.getParam('time');
+  const [amount, setAmount] = useState('');
+  const [available, setAvailable] = useState(false);
+  const item = navigation.getParam('data');
 
-  const dateFormatted = useMemo(
-    () => formatRelative(parseISO(time), new Date(), { locale: pt }),
-    [time]
-  );
+  useEffect(() => {
+    function buttonAvailable() {
+      if (item.amount_available >= amount && amount <= item.amount_available) {
+        setAvailable(true);
+      } else {
+        setAvailable(false);
+      }
 
-  async function handleAddAppointment() {
-    await api.post('appointments', {
-      provider_id: provider.id,
-      date: time,
-    });
+      if (amount === '') {
+        setAvailable(false);
+      }
+      setAmount;
+    }
 
-    navigation.navigate('Dashboard');
-  }
+    buttonAvailable();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [amount]);
 
   return (
     <Background>
       <Container>
-        <Avatar
-          source={{
-            uri: provider.avatar
-              ? provider.avatar.url
-              : 'https://api.adorable.io/avatars/50/abott@adorable.png',
-          }}
+        <Title>{item.name}</Title>
+        <Available>Quantidade disponível: {item.amount_available}</Available>
+        <Input
+          keyboardType="numeric"
+          icon="dialpad"
+          autoCorrect={false}
+          autoCapitalize="none"
+          placeholder="Quantidade desejada"
+          value={amount}
+          onChangeText={setAmount}
         />
-
-        <Name>{provider.name}</Name>
-        <Time>{dateFormatted}</Time>
-
-        <SubmitButton onPress={handleAddAppointment}>
-          Confirmar agendamento
+        <SubmitButton
+          available={available}
+          onPress={
+            available
+              ? () => navigation.navigate('ConfirmItem', { item, amount })
+              : () => Alert.alert('Falha', 'Digita uma quantidade disponível')
+          }
+        >
+          Confirmar quantidade
         </SubmitButton>
       </Container>
     </Background>
@@ -52,7 +59,7 @@ export default function Confirm({ navigation }) {
 }
 
 Confirm.navigationOptions = ({ navigation }) => ({
-  title: 'Confirmar agendamento',
+  title: 'Escolher quantidade',
   headerLeft: () => (
     <TouchableOpacity
       onPress={() => {

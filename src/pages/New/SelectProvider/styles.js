@@ -7,7 +7,6 @@ export const Container = styled.SafeAreaView`
 `;
 
 export const List = styled.FlatList.attrs({
-  showsVerticalScrollIndicator: false,
   contentContainerStyle: { padding: 30 },
 })``;
 
@@ -25,9 +24,12 @@ export const Input = styled(INput)`
 `;
 
 export const Pagination = styled.View`
+  bottom: 0;
+  position: absolute;
   display: flex;
-  width: 90%;
+  width: 97%;
   justify-content: space-between;
   flex-direction: row;
-  margin: 10px auto;
+  margin-left: 5px;
+  margin-bottom: 10px;
 `;

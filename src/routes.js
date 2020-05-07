@@ -18,8 +18,8 @@ import Dashboard from './pages/Dashboard';
 import ConfirmBorrowed from './pages/Dashboard/Confirm';
 
 import SelectProvider from './pages/New/SelectProvider';
-import SelectDateTime from './pages/New/SelectDateTime';
 import Confirm from './pages/New/Confirm';
+import ConfirmItem from './pages/New/ConfirmItem';
 
 export default (signed = false) =>
   createAppContainer(
@@ -60,8 +60,8 @@ export default (signed = false) =>
               screen: createStackNavigator(
                 {
                   SelectProvider,
-                  SelectDateTime,
                   Confirm,
+                  ConfirmItem,
                 },
                 {
                   defaultNavigationOptions: {
