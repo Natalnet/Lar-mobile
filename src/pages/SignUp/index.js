@@ -30,8 +30,11 @@ export default function SignUp({ navigation }) {
 
   const loading = useSelector(state => state.auth.loading);
 
-  function handleSubmit() {
-    dispatch(signUpRequest(name, email, password, project));
+  async function handleSubmit() {
+    try {
+      await dispatch(signUpRequest(name, email, password, project));
+      navigation.navigate('SignIn');
+    } catch (err) {}
   }
 
   return (

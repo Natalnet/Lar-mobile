@@ -4,13 +4,7 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 export const Container = styled.SafeAreaView`
-  flex: 1;
-`;
-
-export const Separator = styled.View`
-  height: 1px;
-  background: rgba(255, 255, 255, 0.2);
-  margin: 20px 0 30px;
+  width: 100%;
 `;
 
 export const Title = styled.Text`
@@ -26,6 +20,8 @@ export const Form = styled.ScrollView.attrs({
   contentContainerStyle: { padding: 30 },
 })`
   align-self: stretch;
+  margin-top: 100px;
+  width: 100%;
 `;
 
 export const FormInput = styled(Input)`
@@ -34,9 +30,4 @@ export const FormInput = styled(Input)`
 
 export const SubmitButton = styled(Button)`
   margin-top: 5px;
-`;
-
-export const LogouButton = styled(Button)`
-  margin-top: 15px;
-  background: #ff290d;
 `;

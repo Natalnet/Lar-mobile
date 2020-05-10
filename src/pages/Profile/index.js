@@ -2,9 +2,6 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { Button, View, Text } from 'react-native';
-import { BaseButton } from 'react-native-gesture-handler';
-
 import Background from '../../components/Background';
 import { updateProfileRequest } from '../../store/modules/user/actions';
 import { signOut } from '../../store/modules/auth/actions';
@@ -16,6 +13,7 @@ import {
   Form,
   FormInput,
   SubmitButton,
+  LogouButton,
 } from './styles';
 
 export default function Profile() {
@@ -120,13 +118,9 @@ export default function Profile() {
             onChangeText={setConfirmPassword}
           />
 
-          <Button title="Atualizar perfil" onPress={handleSubmit}>
-            <Text>Atualizar perfil</Text>
-          </Button>
+          <SubmitButton onPress={handleSubmit}>Atualizar perfil</SubmitButton>
 
-          <View style={{ marginTop: 20 }}>
-            <Button color="#f64c75" title="Deslogar" onPress={handleLogout} />
-          </View>
+          <LogouButton onPress={handleLogout}>Deslogar</LogouButton>
         </Form>
       </Container>
     </Background>

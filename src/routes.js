@@ -21,6 +21,8 @@ import SelectProvider from './pages/New/SelectProvider';
 import Confirm from './pages/New/Confirm';
 import ConfirmItem from './pages/New/ConfirmItem';
 
+import RegisterItem from './pages/Register';
+
 export default (signed = false) =>
   createAppContainer(
     createSwitchNavigator(
@@ -85,6 +87,7 @@ export default (signed = false) =>
                 ),
               },
             },
+            RegisterItem,
             Profile,
           },
           {

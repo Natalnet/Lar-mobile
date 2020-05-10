@@ -13,7 +13,11 @@ export default function Confirm({ navigation }) {
 
   useEffect(() => {
     function buttonAvailable() {
-      if (item.amount_available >= amount && amount <= item.amount_available) {
+      if (
+        item.amount_available >= amount &&
+        amount <= item.amount_available &&
+        amount !== '0'
+      ) {
         setAvailable(true);
       } else {
         setAvailable(false);
@@ -22,6 +26,7 @@ export default function Confirm({ navigation }) {
       if (amount === '') {
         setAvailable(false);
       }
+
       setAmount;
     }
 
