@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.mobie"
+        applicationId "com.natalnet.lar"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
